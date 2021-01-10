@@ -9,8 +9,9 @@ long long d,n;
 vector <ll>  vis(mx),a,b;
 
 
-ll dfs(ll ind)
-{vector <ll> v;
+void dfs(ll ind)
+{
+    vector <ll> v;
     ll val = d;
     if(b[ind]) val = d*2;
     ll dis = a[ind];
@@ -27,6 +28,7 @@ ll dfs(ll ind)
               dfs(*it);
           }
     }
+    v.clear();
 
 
 }
@@ -45,11 +47,9 @@ int main()
        dfs(pos);
     }
     ll d=0;
-    for(ll i=0;i<n;i++)
-    {
-        if(vis[i])d++;
-    }
+    
+    for(ll i=0;i<n;i++) if(vis[i])d++;
+    
     cout << d << endl;
 
 }
-
