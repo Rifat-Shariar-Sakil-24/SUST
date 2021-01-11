@@ -1,0 +1,65 @@
+#include<bits/stdc++.h>
+#define ll long long
+#define pb push_back
+#define sp " "
+#define forn(i,n) for(long long i=0;i<n;i++)
+using namespace std;
+int main()
+{
+    int t; cin >> t;
+    while(t--)
+    {
+       ll n;
+       cin >> n;
+       ll a[n],s;
+       forn(i,n) cin >> a[i];
+       bool v=0,tlag=0,dlag=0;
+       ll cons=0,lol=0;
+       for(ll i=1;i<n-1;i++)
+       {
+           ll x =a[i];
+           ll z = a[i+1];
+           ll y = a[i-1];
+          
+            if((x<y && x <z) || (x>y && x>z))
+           {
+               lol++;cons++;
+               if(cons==2)
+               {
+                   if(i-3>=0)
+                   {
+                     ll now = a[i];
+                     ll las = now;
+                     ll mid = a[i-2];
+                     ll fir = a[i-3];
+ 
+                    if((mid<las && mid<fir) || (mid>las && mid>fir)) v = 1;
+                    else dlag=1;
+                   }
+                   else dlag = 1;
+                
+                  if(i+2<n)
+                  {
+                    ll fir = a[i-1];
+                    ll mid = a[i+1];
+                    ll las = a[i+2];
+ 
+                    if((mid<las && mid<fir) || (mid>las && mid>fir)) v = 1;
+                    else dlag=1;
+                  }
+                  else dlag = 1;
+                       
+               }
+               else if (cons>=3)tlag=1;
+           }
+           else cons=0;
+       }
+     if(tlag) lol-=3;
+     else   if(dlag) lol-=2;
+     else if (lol>0) lol--;
+     cout << lol << endl;
+ 
+ 
+    }
+ 
+}
