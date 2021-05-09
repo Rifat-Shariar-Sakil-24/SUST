@@ -1,0 +1,339 @@
+
+/*
+ID: rifatsa1
+TASK: transform
+LANG: C++                 
+*/
+#include <bits/stdc++.h>
+//#include <iostream>
+//#include <fstream>
+
+ 
+#define   ll             long long
+#define   pb             push_back
+#define   mpa            make_pair
+#define   nl             endl
+#define   bg             begin()
+#define   en             end()
+#define   sz             size()
+#define   sp             " "
+#define   Y              cout << "YES\n"
+#define   N              cout << "NO\n"
+#define   W              cout << "white\n"
+#define   B              cout << "black\n"
+#define   mod            1000000007
+#define   MAX            1e6
+#define   forn(i,n)      for(ll i=0;i<n;i++)
+#define   form(j,m)      for(ll j=0;j<m;j++)
+#define   repp(i,a,b)     for(ll i=a;i<=b;i++)
+#define   rep(j,aa,bb)     for(ll j=aa;j<=bb;j++)
+
+
+using namespace std;
+
+
+
+ll chk_90(string s1[], string s2[], ll n)
+{
+ 
+    string cop[n];
+    forn(i,n) cop[i]=s1[i];
+ 
+
+   ll row = 1, col = 1;
+
+   for( ll j=0;j<n;j++)
+   {
+      for(ll i=n-1;i>=0;i--)
+      {
+          cop[row-1][col-1]=s1[i][j];
+          col++;
+          if(col>n)
+          {
+             col = 1, row++;
+          }
+      }
+   }
+  ll f = 1;
+  forn(i,n)  if(s2[i]!=cop[i])f=0;
+  return f;
+  
+
+}
+
+ll chk_180(string s1[], string s2[], ll n)
+{
+ 
+  string cop[n];
+  forn(i,n) cop[i]=s1[i];
+ 
+
+   ll row = 1, col = 1;
+
+   for( ll j=0;j<n;j++)
+   {
+      for(ll i=n-1;i>=0;i--)
+      {
+          cop[row-1][col-1]=s1[i][j];
+          col++;
+          if(col>n)
+          {
+             col = 1, row++;
+          }
+      }
+   }
+
+  forn(i,n) s1[i]=cop[i];
+
+   row = 1, col = 1;
+
+   for( ll j=0;j<n;j++)
+   {
+      for(ll i=n-1;i>=0;i--)
+      {
+          cop[row-1][col-1]=s1[i][j];
+          col++;
+          if(col>n)
+          {
+             col = 1, row++;
+          }
+      }
+   }
+
+
+  ll f = 1;
+  forn(i,n)  if(s2[i]!=cop[i])f=0;
+  return f;
+  
+
+}
+
+
+
+ll chk_270(string s1[], string s2[], ll n)
+{
+
+    string cop[n];
+   
+    forn(i,n) cop[i]=s1[i];
+    forn(i,n) cout << s1[i] << endl;
+    cout << endl;
+ 
+
+   ll row = 1, col = 1;
+
+   for( ll j=0;j<n;j++)
+   {
+      for(ll i=n-1;i>=0;i--)
+      {
+          cop[row-1][col-1]=s1[i][j];
+          col++;
+          if(col>n)
+          {
+             col = 1, row++;
+          }
+      }
+   }
+  forn(i,n) s1[i]=cop[i];
+
+   row = 1, col = 1;
+
+   for( ll j=0;j<n;j++)
+   {
+      for(ll i=n-1;i>=0;i--)
+      {
+          cop[row-1][col-1]=s1[i][j];
+          col++;
+          if(col>n)
+          {
+             col = 1, row++;
+          }
+      }
+   }
+
+   forn(i,n) s1[i]=cop[i];
+
+   row = 1, col = 1;
+
+   for( ll j=0;j<n;j++)
+   {
+      for(ll i=n-1;i>=0;i--)
+      {
+          cop[row-1][col-1]=s1[i][j];
+          col++;
+          if(col>n)
+          {
+             col = 1, row++;
+          }
+      }
+   }
+
+
+  ll f = 1;
+  forn(i,n)  if(s2[i]!=cop[i])f=0;
+  return f;
+  
+
+}
+ll chk_same(string s1[], string s2[], ll n)
+{
+  ll f = 1;
+   forn(i,n) if(s1[i]!=s2[i]) f=0;
+   return f;
+}
+
+ll hori(string s1[], string s2[], ll n)
+{
+  string  fina[n];
+
+  forn(i,n)
+  {
+      reverse(s1[i].bg,s1[i].en);
+      fina[i] = s1[i];
+  }
+
+  ll f = 1;
+  forn(i,n) if(fina[i]!=s2[i]) f=0;
+
+  return f;
+}
+
+ll hori_123(string s1[], string s2[], ll n)
+{
+  string copi[n], fina[n], cops2[n];
+
+  forn(i,n)
+  {
+      reverse(s1[i].bg,s1[i].en);
+      fina[i] = s1[i];
+  }
+
+  forn(i,n) copi[i]=fina[i],cops2[i]=s2[i];
+  
+
+  ll f = 0;
+  f = chk_90(fina,s2,n);
+  if(f==1) return f;
+
+  forn(i,n) fina[i]=copi[i],s2[i]=cops2[i];
+  f = 0;
+  f = chk_180(fina,s2,n);
+  if(f==1) return f;
+
+  forn(i,n) fina[i]=copi[i],s2[i]=cops2[i];
+   f = 0;
+  f = chk_270(fina,s2,n);
+  if(f==1) return f;
+
+  return f;
+
+   
+
+ 
+
+
+
+}
+
+
+
+int main() 
+{
+   ofstream fout ("transform.out");
+   ifstream fin ("transform.in");
+  ll n;  fin >> n;
+  string s1[n],cop_s1[n];
+  forn(i,n) {fin >> s1[i]; cop_s1[i]=s1[i];}
+
+  string s2[n],cop_s2[n]; 
+  forn(i,n) {fin >> s2[i]; cop_s2[i]=s2[i];}
+
+
+
+  ll f = chk_90(s1,s2,n);
+  
+  if(f==1) 
+  {
+     fout << 1 << endl;
+     return 0;
+  }
+
+  forn(i,n)
+  {
+     s1[i]=cop_s1[i];
+     s2[i]=cop_s2[i];
+  }
+
+  f = chk_180(s1,s2,n);
+
+
+  if(f==1) 
+  {
+     fout << 2 << endl;
+     return 0;
+  }
+
+  forn(i,n)
+  {
+     s1[i]=cop_s1[i];
+     s2[i]=cop_s2[i];
+  }
+
+  f = chk_270(s1,s2,n);
+
+  if(f==1) 
+  {
+     fout << 3 << endl;
+     return 0;
+  }
+
+  forn(i,n)
+  {
+     s1[i]=cop_s1[i];
+     s2[i]=cop_s2[i];
+  }
+
+  f = hori(s1,s2,n);
+  if(f==1) 
+  {
+     fout << 4 << endl;
+     return 0;
+  }
+
+  forn(i,n)
+  {
+     s1[i]=cop_s1[i];
+     s2[i]=cop_s2[i];
+  }
+
+  
+
+  f = hori_123(s1,s2,n);
+  if(f==1) 
+  {
+     fout << 5 << endl;
+     return 0;
+  }
+
+  forn(i,n)
+  {
+     s1[i]=cop_s1[i];
+     s2[i]=cop_s2[i];
+  }
+
+  f = chk_same(s1,s2,n);
+  if(f==1) 
+  {
+     fout << 6 << endl;
+     return 0;
+  }
+  forn(i,n)
+  {
+     s1[i]=cop_s1[i];
+     s2[i]=cop_s2[i];
+  }
+  fout << 7 << endl;
+
+  
+
+}
