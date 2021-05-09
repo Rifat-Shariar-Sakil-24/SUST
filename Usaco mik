@@ -1,0 +1,120 @@
+
+/*
+ID: rifatsa1
+TASK: milk2
+LANG: C++                 
+*/
+#include <bits/stdc++.h>
+#include <iostream>
+#include <fstream>
+
+ 
+#define   ll             long long
+#define   pb             push_back
+#define   mpa            make_pair
+#define   nl             endl
+#define   bg             begin()
+#define   en             end()
+#define   sz             size()
+#define   sp             " "
+#define   Y              cout << "YES\n"
+#define   N              cout << "NO\n"
+#define   W              cout << "white\n"
+#define   B              cout << "black\n"
+#define   mod            1000000007
+#define   MAX            1e6
+#define   forn(i,n)      for(ll i=0;i<n;i++)
+#define   form(j,m)      for(ll j=0;j<m;j++)
+#define   repp(i,a,b)     for(ll i=a;i<=b;i++)
+#define   rep(j,aa,bb)     for(ll j=aa;j<=bb;j++)
+
+
+using namespace std;
+
+
+int main() 
+{
+   ofstream fout ("milk2.out");
+   ifstream fin ("milk2.in");
+  
+   ll n; fin >> n;
+
+
+   vector <ll> start,end;
+   vector < pair <ll,ll> > vp,ina;
+
+   forn(i,n){ll x,y; fin >> x >> y; ina.pb(mpa(x,y));}
+   
+   sort(ina.bg,ina.en);
+   for(auto i:ina)
+   {
+      start.pb(i.first);
+      end.pb(i.second);
+   }
+  
+   map <ll, map < ll,ll> > mp;
+  
+   vector <ll> l,h;
+
+   forn(i,n)
+   {
+     ll x = start[i], y = end[i];
+    
+     for(ll j=0;j<n;j++)
+     {
+       if((start[j]<=y && start[j]>=x) ||  (end[j]<=y && end[j]>=x) || (x<=end[j] && x>=start[j]) ||  (y<=end[j] && y>=start[j]))
+       {
+          x = min(start[j],x);
+          y = max(end[j],y);
+       }
+     }
+     ll low = x,  high = y;
+     mp[low][high]=1;
+     vp.pb(mpa(low,high));
+    
+   }
+
+   ll mx = 0;
+   for(auto i:vp)
+   {
+     ll x = i.first;
+     ll y = i.second;
+     mx = max(mx,y-x);
+   }
+
+ 
+     fout << mx << sp;
+   
+     map <ll, map <ll,ll> > chk;
+     vector <pair <ll,ll> > fina;
+     
+     for(auto i:vp)
+     {
+       if(chk[i.first][i.second]==0)
+       {
+         fina.pb(mpa(i.first,i.second));
+         chk[i.first][i.second]=1;
+       }
+     }
+     
+     sort(fina.bg,fina.en);
+     
+     if(fina.sz==0) fout << 0 << endl;
+     else
+     {
+        for(auto i:fina)  l.pb(i.first),h.pb(i.second);
+        ll jabe = l.size();
+        ll age_l = l[0];
+        ll age_h = h[0];
+      
+        ll mn = 0;
+        rep(i,1,jabe-1)
+        {
+          ll val = l[i]-age_h;
+          age_h = h[i];
+          mn = max(val,mn);
+        }
+      fout << mn << endl;
+     }
+
+}
